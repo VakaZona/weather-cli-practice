@@ -21,10 +21,8 @@
     "url": "*"
   },
   "dependencies": {
-    "axios": "^1.6.7"
+    "axios": "^1.6.7",
+    "chalk": "^5.3.0"
   },
-  "devDependencies": {},
-  "peerDependencies": {},
-  "peerDependenciesMeta": {},
-  "optionalDependencies": {}
+  "peerDependenciesMeta": {}
 }
