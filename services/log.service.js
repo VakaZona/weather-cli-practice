@@ -12,7 +12,7 @@ const printHelp = () => {
 	console.log(
 		chalk.bgCyan('HELP') + '\n' + 
 		'Without parameters - weather output' + '\n' +
-		'-s [CITY] for setup city' + '\n' +
+		'-c [CITY] for setup city' + '\n' +
 		'-h helpers output' + '\n' +
 		'-t [API_KEY] for save API token'
 	)

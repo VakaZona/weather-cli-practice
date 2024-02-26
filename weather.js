@@ -19,6 +19,19 @@ const saveToken = async (token) => {
 	
 }
 
+const SaveCity = async (city) => {
+	if (!city.length) {
+		printError('No city');
+		return;
+	}
+	try {
+		await saveKeyValue(TOKEN_DICTIONARY.city, city);
+		printSuccess('City save')
+	} catch (error) {
+		printError(error.message);
+	}
+}
+
 const getForcast = async () => {
 	try {
 		const weather = await getWeather('moscow');
@@ -41,8 +54,8 @@ const initCLI = () => {
 	if (args.h) {
 		printHelp();
 	}
-	if (args.s) {
-		
+	if (args.c) {
+		return SaveCity(args.c)
 	}
 	if (args.t) {
 		return saveToken(args.t)
