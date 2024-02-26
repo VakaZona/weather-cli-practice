@@ -2,8 +2,8 @@
 
 import { getArgs } from './helpers/args.js';
 import { getWeather } from './services/api.service.js';
-import { printError, printHelp, printSuccess } from './services/log.service.js';
-import { saveKeyValue, TOKEN_DICTIONARY } from './services/storage.service.js';
+import { printError, printHelp, printSuccess, printWeather } from './services/log.service.js';
+import { getKeyValue, saveKeyValue, TOKEN_DICTIONARY } from './services/storage.service.js';
 
 const saveToken = async (token) => {
 	if (!token.length) {
@@ -34,8 +34,9 @@ const SaveCity = async (city) => {
 
 const getForcast = async () => {
 	try {
-		const weather = await getWeather('moscow');
-		console.log(weather);
+		const city = await getKeyValue(TOKEN_DICTIONARY.city);
+		const weather = await getWeather(city);
+		printWeather(weather)
 	} catch (error) {
 		if (error?.response?.status == 404) {
 			printError('Error with country')
@@ -52,7 +53,7 @@ const getForcast = async () => {
 const initCLI = () => {
 	const args = getArgs(process.argv)
 	if (args.h) {
-		printHelp();
+		return printHelp();
 	}
 	if (args.c) {
 		return SaveCity(args.c)
@@ -60,7 +61,7 @@ const initCLI = () => {
 	if (args.t) {
 		return saveToken(args.t)
 	}
-	getForcast();
+	return getForcast();
 }
 
 initCLI();
